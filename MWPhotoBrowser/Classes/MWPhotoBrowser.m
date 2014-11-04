@@ -1494,9 +1494,13 @@
                     
                     // Show activity view controller
                     NSMutableArray *items = [NSMutableArray arrayWithObject:[photo underlyingImage]];
-                    if (photo.caption) {
-                        [items addObject:photo.caption];
+                    if (photo.shareText) {
+                        [items addObject:photo.shareText];
                     }
+                    if (photo.shareTitleText) {
+                        [items addObject:photo.shareTitleText];
+                    }
+                    
                     self.activityViewController = [[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:nil];
                     
                     // Show loading spinner after a couple of seconds
@@ -1642,7 +1646,7 @@
     if ([photo underlyingImage]) {
         MFMailComposeViewController *emailer = [[MFMailComposeViewController alloc] init];
         emailer.mailComposeDelegate = self;
-        [emailer setSubject:NSLocalizedString(@"Photo", nil)];
+        [emailer setSubject:@"aaaa"];
         [emailer addAttachmentData:UIImagePNGRepresentation([photo underlyingImage]) mimeType:@"png" fileName:@"Photo.png"];
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             emailer.modalPresentationStyle = UIModalPresentationPageSheet;
