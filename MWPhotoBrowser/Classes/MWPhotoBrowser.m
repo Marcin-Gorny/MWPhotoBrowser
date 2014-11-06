@@ -1497,12 +1497,12 @@
                     if (photo.shareText) {
                         [items addObject:photo.shareText];
                     }
-                    if (photo.shareTitleText) {
-                        [items addObject:photo.shareTitleText];
-                    }
+
                     
                     self.activityViewController = [[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:nil];
-                    
+                    if (photo.shareTitleText) {
+                        [self.activityViewController setValue:photo.shareTitleText forKey:@"subject"];
+                    }
                     // Show loading spinner after a couple of seconds
                     double delayInSeconds = 2.0;
                     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
