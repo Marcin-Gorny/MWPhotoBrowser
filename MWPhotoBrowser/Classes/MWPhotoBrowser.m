@@ -1516,8 +1516,12 @@
                     typeof(self) __weak weakSelf = self;
                     [self.activityViewController setCompletionHandler:^(NSString *activityType, BOOL completed) {
                         weakSelf.activityViewController = nil;
+                        
                         [weakSelf hideControlsAfterDelay];
                         [weakSelf hideProgressHUD:YES];
+                        if (weakSelf.photoBrowserCompletionHandler) {
+                            weakSelf.photoBrowserCompletionHandler(activityType,completed);
+                        }
                     }];
                     // iOS 8 - Set the Anchor Point for the popover
                     if (SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"8")) {
